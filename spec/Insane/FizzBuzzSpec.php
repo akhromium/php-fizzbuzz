@@ -14,16 +14,17 @@ use PhpSpec\ObjectBehavior;
  */
 class FizzBuzzSpec extends ObjectBehavior
 {
-    function it_is_initializable()
-    {
-        $this->shouldHaveType(FizzBuzz::class);
-    }
+    protected $to_15_payload = [1,2,'fizz',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz',13,14,'fizzbuzz'];
 
-    function it_returns_1_for_1() {
-      $this
-        ->fire(1)
-        ->shouldReturn(1);
-    }
+  function it_is_initializable() {
+    $this->shouldHaveType(FizzBuzz::class);
+  }
+
+  function it_returns_1_for_1() {
+    $this
+      ->fire(1)
+      ->shouldReturn(1);
+  }
 
   function it_returns_2_for_2() {
     $this
@@ -78,8 +79,12 @@ class FizzBuzzSpec extends ObjectBehavior
   }
 
   function it_generates_output_from_range() {
-      $this
-        ->sequence(range(1,15))
-        ->shouldReturn([1,2,'fizz',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz',13,14,'fizzbuzz']);
+    $this
+      ->sequence(range(1, 15))
+      ->shouldReturn($this->to_15_payload);
+  }
+
+  function it_generates_output_to_limit() {
+    $this->to(15)->shouldReturn($this->to_15_payload);
   }
 }

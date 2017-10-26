@@ -1,0 +1,17 @@
+{
+  "name": "insane/fizz-buzz",
+  "authors": [
+    {
+      "name": "Andrey Khromyshev",
+      "email": "profakz@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {
+      "": "src"
+    }
+  },
+  "require": {
+    "phpspec/phpspec": "^4.1"
+  }
+}

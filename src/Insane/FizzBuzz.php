@@ -52,4 +52,46 @@ class FizzBuzz {
     }, range(1, $limit));
     return $output;
   }
+
+  /**
+   * Just for fun.
+   *
+   * @param int $limit
+   *
+   * @return array
+   */
+  public function toBinary(int $limit) {
+    // labels element offset.
+    $labels = ['', 'fizz', 'buzz', 'fizzbuzz'];
+    $output = [];
+
+    // Right -> Left
+    // Divisible state:
+    // 11 00 00 01 00 10 01 00 00 01 10 00 01 00 00
+    // 15 14 13 12 11 10 9  8  7  6  5  4  3  2  1
+    // 11 - fizzbuzz
+    // 10 - buzz
+    // 01 - fizz
+    // 00 - number
+    $state = bindec("110000010010010000011000010000"); // 0x810092048
+
+    foreach (range(1, $limit) as $i) {
+      // Match on last two bits ( 3 is 0011 - only last 2 bits set )
+      $offset = $state & 3;
+
+      // if $offset > 0
+      if ($offset) {
+        $output[] = $labels[$offset];
+      }
+      else {
+        $output[] = $i;
+      }
+      // shift right, shift left, then or
+      // 1. shift 2 bits right to a next 00 -> 00 -> 01 .. etc
+      // 2. add 28 bits on the left offset
+      $state = $state >> 2 | $offset << 28;
+    }
+
+    return $output;
+  }
 }

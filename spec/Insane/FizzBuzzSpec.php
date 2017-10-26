@@ -14,7 +14,7 @@ use PhpSpec\ObjectBehavior;
  */
 class FizzBuzzSpec extends ObjectBehavior
 {
-    protected $to_15_payload = [1,2,'fizz',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz',13,14,'fizzbuzz'];
+    protected $to_20_payload = [1,2,'fizz',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz',13,14,'fizzbuzz',16,17,'fizz',19,'buzz'];
 
   function it_is_initializable() {
     $this->shouldHaveType(FizzBuzz::class);
@@ -80,11 +80,16 @@ class FizzBuzzSpec extends ObjectBehavior
 
   function it_generates_output_from_range() {
     $this
-      ->sequence(range(1, 15))
-      ->shouldReturn($this->to_15_payload);
+      ->sequence(range(1, 20))
+      ->shouldReturn($this->to_20_payload);
   }
 
   function it_generates_output_to_limit() {
-    $this->to(15)->shouldReturn($this->to_15_payload);
+    $this->to(20)->shouldReturn($this->to_20_payload);
+  }
+
+  function it_generates_output_to_limit_uning_binary() {
+    $this->toBinary(20)
+      ->shouldReturn($this->to_20_payload);
   }
 }

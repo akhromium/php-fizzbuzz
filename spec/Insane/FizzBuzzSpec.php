@@ -76,4 +76,10 @@ class FizzBuzzSpec extends ObjectBehavior
       ->fire(75)
       ->shouldReturn('fizzbuzz');
   }
+
+  function it_generates_output_from_range() {
+      $this
+        ->sequence(range(1,15))
+        ->shouldReturn([1,2,'fizz',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz',13,14,'fizzbuzz']);
+  }
 }

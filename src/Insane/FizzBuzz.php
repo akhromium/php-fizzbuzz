@@ -5,17 +5,33 @@ namespace Insane;
 class FizzBuzz
 {
   /**
-   * Returns number or fizz|buzz|fizzbuzz for given item.
+   * Returns number|fizz|buzz|fizzbuzz for given item.
    *
    * @param int $number
    *
    * @return string
    */
-    public function fire($number)
+    public function fire(int $number)
     {
         if($number%15 == 0) return 'fizzbuzz';
         if($number%5 == 0) return 'buzz';
         if($number%3 == 0) return 'fizz';
         return $number;
+    }
+
+  /**
+   * Returns array of number|fizz|buzz|fizzbuzz for a given range.
+   *
+   * @param array $array
+   *
+   * @return array of FizzBuzz stuff.
+   */
+    public function sequence(array $array) : array
+    {
+       $output = [];
+       for($i=0; $i<count($array); $i++) {
+         $output[] = $this->fire($array[$i]);
+       }
+       return $output;
     }
 }
